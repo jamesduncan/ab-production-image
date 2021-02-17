@@ -1,5 +1,5 @@
-# AppBuilder core image. Intended to be used in a stack with MariaDB, redis,
-# and some others stuff.
+# AppBuilder api-sails image. Intended to be used in a stack with MariaDB,
+# redis, and others.
 #
 # At build time the image will have root:root as the configured DB credentials.
 # The runtime DB password must be mounted in a plaintext file located
@@ -24,6 +24,7 @@ ADD install-op.exp /root/
 # daemon process may get terminated before OpsPortal is done.
 
 # Install OpsPortal
+# (scripted run of `appdev install ab --develop`)
 RUN nohup bash -c "mysqld &" && \
     sleep 2 && \
     mysql -uroot -proot -h 127.0.0.1 < /root/01-CreateDBs.sql && \
@@ -67,6 +68,7 @@ ADD reSetup.js /app/
 WORKDIR /app
 RUN node reSetup.js
 WORKDIR /app/assets
+# this part is still kind of buggy right now:
 RUN appdev build OpsPortal
 
 # Clean up
