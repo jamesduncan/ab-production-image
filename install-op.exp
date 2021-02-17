@@ -1,0 +1,43 @@
+#!/usr/bin/expect -f
+
+
+set timeout -1
+spawn appdev install app --develop
+
+expect "which db adaptor do you want to use \\\[mysql, sqllite, disk, memory\\\]: (mysql)"
+send -- "mysql\n"
+
+expect "connect by socket or port \\\[socket,port\\\]: (port)"
+send -- "port\n"
+
+expect "host \\\[localhost,http://your.server.com\\\]: (localhost)"
+send -- "localhost\n"
+
+expect "port: (8889)"
+send -- "3306\n"
+
+expect "user: (root)"
+send -- "root\n"
+
+expect "password: (root)"
+send -- "root\n"
+
+expect "database: (develop)"
+send -- "site\n"
+
+expect "do you wish to install a separate db adaptor for running tests\\\[y, n\\\]: (y)"
+send -- "n\n"
+
+expect "do you want to enable SSL \\\[yes, no\\\]: (no)"
+send -- "no\n"
+
+expect "which type of authentication to use \\\[local, CAS, Google\\\]: (local)"
+send -- "local\n"
+
+expect "which languages do you want installed by default \\\[en:English,"
+send -- "\n"
+
+expect "is this a production environment or local development \\\[prod, dev\\\]: (prod)"
+send -- "prod\n"
+
+close
