@@ -62,6 +62,7 @@ RUN rm -rf node_modules/opstool-hris* && \
     mv head.tmp config/connections.js
 
 # Install AppBuilder module
+ARG APPBUILDER_VER=1
 WORKDIR /app
 RUN npm install --save appdevdesigns/app_builder#jc/trim-dependencies
 RUN npm install babel-preset-env@1.7.0
@@ -92,6 +93,11 @@ RUN npm run build
 # Installing sails under node:10 to replace the symlink
 RUN rm -rf node_modules/sails
 RUN npm install sails@0.12.14
+
+# Workaround for Steal.js minify error
+WORKDIR /app/assets/OpsPortal
+RUN sed s/'minify: true'/'minify: false'/g build.appdev.js > sed.tmp
+RUN mv sed.tmp build.appdev.js
 
 # Build OP client side code
 RUN npm install -g appdevdesigns/appdev-cli
