@@ -1,8 +1,7 @@
 /**
  * 1. Updates the config files to use the actual runtime DB credentials
  * 2. Tests the DB connection
- * 3. Rebuild client side code
- * 4. Lifts sails
+ * 3. Lifts sails
  *
  * At runtime the MySQL root password is expected to be found in a plaintext 
  * config file located at "/secret/password"
@@ -108,14 +107,9 @@ async.doUntil(
     (err) => {
         if (isConnectedDB) {
             console.log('OK!');
-            /**
-             * Step 3: Rebuild client side code
-             */
-            console.log('Building client side code')
-            require(__dirname + '/reSetup.js');
 
             /**
-             * Step 4: Lift Sails 
+             * Step 3: Lift Sails 
              */
             console.log('Lifting Sails');
             require(__dirname + '/app.js');
