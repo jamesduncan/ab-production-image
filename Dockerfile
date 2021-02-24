@@ -1,6 +1,8 @@
 # AppBuilder api-sails image. Intended to be used in a stack with MariaDB,
 # redis, and others.
 #
+# Repository: https://github.com/appdevdesigns/ab-production-image
+#
 # At build time the image will have root:root as the configured DB credentials.
 # The runtime DB password must be mounted in a plaintext file located
 # at "/secret/password".
@@ -15,7 +17,6 @@
 
 
 FROM node:6.12.3 AS stage1
-EXPOSE 1337/tcp
 ENV NODE_ENV=production
 USER root
 RUN apt update
@@ -109,6 +110,9 @@ RUN appdev build OpsPortal
 
 FROM node:6.12.3 AS stage3
 ENV NODE_ENV=production
+EXPOSE 1337/tcp
+LABEL repository="https://github.com/appdevdesigns/ab-production-image"
+
 RUN npm install -g sails@0.12.14
 COPY --from=stage2 /app /app
 
@@ -121,3 +125,7 @@ ADD opsportal.ejs /app/views/page/
 WORKDIR /app
 ADD ab-launcher.js /app/
 CMD node --max-old-space-size=2048 --stack-size=2048 ab-launcher.js
+
+# Container is healthy if it accepts requests on port 1337
+HEALTHCHECK --interval=1m --timeout=10s \
+    CMD curl -f http://localhost:1337/robots.txt || exit 1

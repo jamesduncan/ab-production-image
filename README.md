@@ -18,4 +18,4 @@ files accordingly before each launch.
 
 
 ## Example usage
-`docker build -t ab-production .`
+`docker build --compress -t digiserve/ab-sails-api .`
