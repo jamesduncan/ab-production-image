@@ -44,7 +44,7 @@ else {
     localJS.connections.appdev_default.user = user;
     localJS.connections.appdev_default.password = password;
     localJS.connections.appdev_default.database = db;
-    localJS.appbuilder.mcc.enabled = false;
+    //localJS.appbuilder.mcc.enabled = false;
 
     // Write config files
     fs.writeFileSync(
