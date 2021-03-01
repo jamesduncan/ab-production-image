@@ -1,4 +1,4 @@
-Base files for building the AppBuilder production api-sails Docker image.
+Base files for building the AppBuilder production [digiserve/ab-sails-api](https://hub.docker.com/repository/docker/digiserve/ab-sails-api) Docker image.
 
 
 # Preface
