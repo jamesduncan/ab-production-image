@@ -42,12 +42,24 @@ else {
     adn.defaults['label-user'] = user;
     adn.defaults['label-pass'] = password;
     adn.defaults['label-db'] = db;
+
     localJS.connections.appdev_default.host = host;
     localJS.connections.appdev_default.port = port;
     localJS.connections.appdev_default.user = user;
     localJS.connections.appdev_default.password = password;
     localJS.connections.appdev_default.database = db;
-    //localJS.appbuilder.mcc.enabled = false;
+
+    // Other node.js services in the stack use this?
+    localJS.datastores.appbuilder.host = host;
+    localJS.datastores.appbuilder.port = port;
+    localJS.datastores.appbuilder.database = 'apbuilder';
+    localJS.datastores.appbuilder.user = user;
+    localJS.datastores.appbuilder.password = password;
+    localJS.datastores.site.host = host;
+    localJS.datastores.site.port = port;
+    localJS.datastores.site.database = 'site';
+    localJS.datastores.site.user = user;
+    localJS.datastores.site.password = password;
 
     // Write config files
     fs.writeFileSync(

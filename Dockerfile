@@ -89,7 +89,7 @@ WORKDIR /app/node_modules/app_builder
 RUN npm install --only=dev
 RUN npm run build
 
-# Installing sails under node:10 to replace the symlink
+# Install sails under node:10 to replace the symlink
 RUN rm -rf node_modules/sails
 RUN npm install sails@0.12.14
 
