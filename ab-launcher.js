@@ -27,7 +27,7 @@ if (!fs.existsSync('/secret/password')) {
 }
 else {
     // Mounted runtime password
-    password = fs.readFileSync('/secret/password', 'utf8');
+    password = fs.readFileSync('/secret/password', 'utf8').trim();
 
     // Read config files
     var adn = require('/app/.adn');
