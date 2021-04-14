@@ -11,12 +11,15 @@ const fs = require('fs');
 const async = require('async');
 const mysql = require('mysql');
 
+const DB_CONNECTION_ATTEMPTS = 100;
+
 // Standard AppBuilder DB settings
-const host = 'db'; // refers to the mariadb service in the docker stack
+const host = 'db'; // refers to the mariadb service within the docker stack
 const port = '3306';
 const db = 'site';
 const user = 'root';
 var password = 'root'; // will be updated below
+
 
 /**
  * Step 1: Update runtime DB credentials
@@ -94,8 +97,8 @@ async.doUntil(
         if (isConnectedDB) {
             until(null, true);
         }
-        else if (dbConnectCount >= 100) {
-            console.error('Unable to connect to DB after 100 attempts')
+        else if (dbConnectCount >= DB_CONNECTION_ATTEMPTS) {
+            console.error(`Unable to connect to DB after ${DB_CONNECTION_ATTEMPTS} attempts`)
             until(null, true);
         }
         else {
