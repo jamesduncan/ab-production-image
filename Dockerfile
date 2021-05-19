@@ -56,10 +56,11 @@ RUN rm -rf node_modules/opstool-hris* && \
     head -n -2 config/connections.js > head.tmp && \
     mv head.tmp config/connections.js
 
-# Install AppBuilder module (#master branch)
+# Install AppBuilder module
+ARG AB_GITHUB_COMMIT=master
 WORKDIR /app
 RUN npm install --save skipper
-RUN npm install --save appdevdesigns/app_builder
+RUN npm install --save appdevdesigns/app_builder#${AB_GITHUB_COMMIT}
 RUN npm install babel-preset-env@1.7.0
 
 # Install opstool-emailNotifications

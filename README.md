@@ -21,5 +21,12 @@ directory to change various settings. However, "/secret/password" still
 supercedes that for the DB password, unless you bypass `ab-launcher.js`.
 
 
+# Arguments
+  - `AB_GITHUB_COMMIT`
+  
+    You may specify a branch, tag, or commit of the app_builder repository on github.
+    The default is `master`.
+
+
 # Example usage
-`docker build --compress -t digiserve/ab-sails-api .`
+`docker build --no-cache --compress --build-arg AB_GITHUB_COMMIT=f9f0715f -t digiserve/ab-sails-api:v1 .`
