@@ -88,7 +88,7 @@ COPY --from=stage1 /app /app
 # Build AB client side code
 WORKDIR /app/node_modules/app_builder
 RUN npm install --only=dev
-RUN npm run build
+RUN npm run prodbuild
 
 # Install sails under node:10 to replace the symlink
 RUN rm -rf node_modules/sails
