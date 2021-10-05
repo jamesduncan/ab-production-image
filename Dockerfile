@@ -122,6 +122,9 @@ COPY routes.js /app/config/
 COPY PageController.js /app/api/controllers/
 ADD opsportal.ejs /app/views/page/
 
+# Delete expired LetsEncrypt root certificate
+RUN rm -f /usr/share/ca-certificates/mozilla/DST_Root_CA_X3.crt
+
 # Lift Sails with runtime DB credentials
 WORKDIR /app
 ADD ab-launcher.js /app/
