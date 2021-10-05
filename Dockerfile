@@ -128,7 +128,7 @@ RUN rm -f /usr/share/ca-certificates/mozilla/DST_Root_CA_X3.crt
 # Lift Sails with runtime DB credentials
 WORKDIR /app
 ADD ab-launcher.js /app/
-CMD node --max-old-space-size=2048 --stack-size=2048 ab-launcher.js
+CMD node --use-openssl-ca --max-old-space-size=2048 --stack-size=2048 ab-launcher.js
 
 # Container is healthy if it accepts requests on port 1337
 HEALTHCHECK --interval=1m --timeout=10s \
