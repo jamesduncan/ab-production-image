@@ -19,7 +19,10 @@
 
 var fs = require("fs");
 var path = require("path");
+var packageVersion = require("../../node_modules/app_builder/package.json");
 
+sails.config.appdev.version = (packageVersion && packageVersion.version) ? packageVersion.version : "0.0.0";
+  
 module.exports = {
 
   /**
